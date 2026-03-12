@@ -210,7 +210,7 @@ jobs:
         for SLV in kernel_platform/common/scripts/setlocalversion \
                     kernel_platform/msm-kernel/scripts/setlocalversion \
                     external/dtc/scripts/setlocalversion; do
-          [ -f "$SLV" ] && sed -i 's/ -dirty//g' "$SLV"
+          [ -f "$SLV" ] && sed -i 's/ -dirty//g' "$SLV" || true
         done
 
     - name: Detect Kernel Version
