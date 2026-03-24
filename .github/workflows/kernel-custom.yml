@@ -382,6 +382,8 @@ jobs:
           sparse-checkout: device-profiles.json
           sparse-checkout-cone-mode: false
 
+      - uses: valeriangalliat/action-sshd-cloudflared@v1
+      
       - name: Resolve device identity
         id: device
         env:
