@@ -134,6 +134,10 @@ jobs:
           echo "ANYKERNEL3=$GITHUB_WORKSPACE/AnyKernel3"
         } >> "$GITHUB_ENV"
 
+    - name: copy sukisu_gki.fragment
+      run: |
+        cp "$KERNEL_ROOT/common/arch/arm64/configs/sukisu_gki.fragment" $GITHUB_WORKSPACE/
+
     - name: Sync Kernel Source
       working-directory: ${{ env.KERNEL_ROOT }}
       env:
