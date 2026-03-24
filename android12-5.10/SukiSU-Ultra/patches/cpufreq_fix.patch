@@ -1,0 +1,18 @@
+From: Android Kernel Builder
+Subject: [PATCH] cpufreq: fix format specifier for unsigned long
+
+Fixes a -Werror,-Wformat build failure on aarch64 by matching
+the sscanf format specifier to the unsigned long variable.
+
+---
+ drivers/cpufreq/cpufreq.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/cpufreq/cpufreq.c b/drivers/cpufreq/cpufreq.c
+--- a/drivers/cpufreq/cpufreq.c
++++ b/drivers/cpufreq/cpufreq.c
+@@ -834,7 +834,7 @@
+ 
+-        ret = sscanf(buf, "%u", &val);
++        ret = sscanf(buf, "%lu", &val);
+
