@@ -383,6 +383,10 @@ jobs:
           echo "KBUILD_BUILD_HOST=$STOCK_BUILD_HOST"
           echo "IDENTITY_STATUS=Applied ($DEVICE_CODENAME)"
         } >> "$GITHUB_ENV"
+        
+    - name: Fix cpufreq.c type mismatch (MODIFIED)
+      run: |
+	      sed -i 's/ret = sscanf(buf, "%u", \&val);/ret = sscanf(buf, "%lu", \&val);/' $KERNEL_ROOT/common/drivers/cpufreq/cpufreq.c
 
     - name: Build Kernel
       working-directory: ${{ env.KERNEL_ROOT }}
