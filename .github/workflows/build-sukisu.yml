@@ -233,6 +233,14 @@ jobs:
       run: |
         bash "$GITHUB_WORKSPACE/android12-5.10/build-helpers/apply-kernel-patches.sh" . "$KERNEL_VER" "$KERNEL_PATCHES"
 
+    - name: (CUSTOM) Apply Droidspace Patches
+      working-directory: ${{ env.KERNEL_ROOT }}/common
+      run: |
+        cd "$GITHUB_WORKSPACE/android15-6.6/SukiSU-Ultra/patches
+        patch -p1 < "$GITHUB_WORKSPACE/android15-6.6/SukiSU-Ultra/patches/02.fix_restore cgroup file prefix handling .patch"
+        patch -p1 < "$GITHUB_WORKSPACE/android15-6.6/SukiSU-Ultra/patches/03.5.15+_use_android_abi_padding_for_posix_mqueue.patch"
+        patch -p1 < "$GITHUB_WORKSPACE/android15-6.6/SukiSU-Ultra/patches/04.use_android_abi_padding_for_sysvipc_task_struct.patch"
+
     - name: Setup Baseband Guard
       if: inputs.add_bbg
       working-directory: ${{ env.KERNEL_ROOT }}
