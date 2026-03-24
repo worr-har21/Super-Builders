@@ -51,22 +51,15 @@ if $ADD_ZRAM && ! $USE_KLEAF; then
   sed -i 's/CONFIG_ZRAM=m/CONFIG_ZRAM=y/g' "$DEFCONFIG" 2>/dev/null || true
   sed -i 's/CONFIG_ZSMALLOC=m/CONFIG_ZSMALLOC=y/g' "$DEFCONFIG" 2>/dev/null || true
   sed -i 's/CONFIG_IP6_NF_NAT=n/CONFIG_IP6_NF_NAT=y/g' "$DEFCONFIG" 2>/dev/null || true
-  echo "CONFIG_SYSCTL=y" >> "$DEFCONFIG"
   echo "CONFIG_SYSVIPC=y" >> "$DEFCONFIG"
   echo "CONFIG_POSIX_MQUEUE=y" >> "$DEFCONFIG"
-  echo "CONFIG_UTS_NS=y" >> "$DEFCONFIG"
+  echo "CONFIG_PID_NS=y" >> "$DEFCONFIG"
   echo "CONFIG_IPC_NS=y" >> "$DEFCONFIG"
   echo "CONFIG_USER_NS=y" >> "$DEFCONFIG"
-  echo "CONFIG_SECCOMP=y" >> "$DEFCONFIG"
-  echo "CONFIG_SECCOMP_FILTER=y" >> "$DEFCONFIG"
   echo "CONFIG_CGROUP_PIDS=y" >> "$DEFCONFIG"
   echo "CONFIG_CGROUP_DEVICE=y" >> "$DEFCONFIG"
   echo "CONFIG_DEVTMPFS=y" >> "$DEFCONFIG"
-  echo "CONFIG_FW_LOADER=y" >> "$DEFCONFIG"
   echo "CONFIG_FW_LOADER_COMPRESS=y" >> "$DEFCONFIG"
-  echo "CONFIG_NET_NS=y" >> "$DEFCONFIG"
-  echo "CONFIG_NETFILTER_ADVANCED=y" >> "$DEFCONFIG"
-  echo "CONFIG_NETFILTER_XT_TARGET_MASQUERADE=y" >> "$DEFCONFIG"
 fi
 
 if ! $USE_KLEAF; then
