@@ -391,14 +391,11 @@ jobs:
           echo "IDENTITY_STATUS=Applied ($DEVICE_CODENAME)"
         } >> "$GITHUB_ENV"
 
-    - name: Fix cpufreq.c type mismatch (MODIFIED)
-      run: |
-        sed -i 's/ret = sscanf(buf, "%u", \&val);/ret = sscanf(buf, "%lu", \&val);/' $KERNEL_ROOT/common/drivers/cpufreq/cpufreq.c
-
     - name: Build Kernel
       working-directory: ${{ env.KERNEL_ROOT }}
       run: |
         BUILD_RC=0
+        KCFLAGS="-Wno-error=format -Wno-format"
         LTO_MODE=thin
         [[ "$ANDROID_VER" == android16* || "$KERNEL_VER" == "6.12" ]] && LTO_MODE=none
         if [ -f "build/build.sh" ]; then
