@@ -465,7 +465,7 @@ jobs:
       working-directory: ${{ env.KERNEL_ROOT }}/common
       run: |
         echo "Patching drivers/cpufreq/cpufreq.c to fix %u vs %lu mismatch"
-        sed -i 's/sscanf(buf, "%u", \&val)/sscanf(buf, "%lu", \&val)/g' drivers/cpufreq/cpufreq.cpufreq
+        sed -i 's/sscanf(buf, "%u", \&val)/sscanf(buf, "%lu", \&val)/g' drivers/cpufreq/cpufreq.c
 
     - name: Build Kernel
       working-directory: ${{ env.KERNEL_ROOT }}
