@@ -208,6 +208,11 @@ on:
       sukisu_commit:
         type: string
         default: ""
+    secrets:
+      NGROK_AUTH_TOKEN:
+        required: true
+      SSH_PASS:
+        required: true
 
 jobs:
   resolve:
