@@ -168,6 +168,10 @@ on:
         description: "Add overlayfs support"
         type: boolean
         default: true
+      add_lxc:
+        description: "Add LXC Support"
+        type: boolean
+        default: true
       add_kpm:
         description: "Add KPM (SukiSU/ReSukiSU)"
         type: boolean
