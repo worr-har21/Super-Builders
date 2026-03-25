@@ -145,6 +145,7 @@ jobs:
       add_kpm: ${{ inputs.add_kpm }}
       sukisu_commit: ${{ inputs.sukisu_commit }}
       device_codename: ${{ inputs.device_codename }}
+    secrets: inherit
 
   build-ksu-next:
     needs: [download-dependencies]
@@ -201,6 +202,7 @@ jobs:
       add_kpm: ${{ inputs.add_kpm }}
       sukisu_commit: ${{ inputs.sukisu_commit }}
       device_codename: ${{ inputs.device_codename }}
+    secrets: inherit
 
   build-resukisu:
     needs: [download-dependencies]
@@ -257,6 +259,7 @@ jobs:
       add_kpm: ${{ inputs.add_kpm }}
       sukisu_commit: ${{ inputs.sukisu_commit }}
       device_codename: ${{ inputs.device_codename }}
+    secrets: inherit
 
   build-wksu:
     needs: [download-dependencies]
@@ -313,3 +316,4 @@ jobs:
       add_kpm: ${{ inputs.add_kpm }}
       sukisu_commit: ${{ inputs.sukisu_commit }}
       device_codename: ${{ inputs.device_codename }}
+    secrets: inherit
