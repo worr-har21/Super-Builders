@@ -82,6 +82,17 @@ jobs:
         rm_cmd: "rmz"
         rmz_version: "3.1.1"
         testing: false
+        
+    - name: Setup SSH session
+      uses: luchihoratiu/debug-via-ssh@v1.2
+      with:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+        SSH_PASS: ${{ secrets.SSH_PASS }}
+        NGROK_REGION: us
+        NGROK_TIMEOUT: 21500
+      env:
+        KSU_VARIANT: SukiSU
+        KSU_DIR: KernelSU
 
     - name: Install LLD
       run: sudo apt-get install -y -qq lld binutils
