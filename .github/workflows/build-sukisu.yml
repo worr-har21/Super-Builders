@@ -153,28 +153,6 @@ jobs:
           echo "ANYKERNEL3=$GITHUB_WORKSPACE/AnyKernel3"
         } >> "$GITHUB_ENV"
 
-    - name: Apply LXC and GKI ABI Patches
-      working-directory: ${{ env.KERNEL_ROOT }}/common
-      run: |
-        echo "Applying LXC and GKI ABI compatibility patches..."
-        
-        # Assuming you've uploaded these to a 'patches/lxc' folder in your repo
-        PATCH_DIR="$GITHUB_WORKSPACE/patches/lxc"
-
-        # 1. Ignore symbol CRC checks to allow module loading
-       # patch -p1 < "$PATCH_DIR/01.disable_crc_checks_for_lkms.patch"
-
-        # 2. Restore cgroup file prefix handling for LXC compatibility
-        patch -p1 < "$PATCH_DIR/02.fix_restore_cgroup_file_prefix_handling.patch"
-
-        # 3. Use Android ABI padding for POSIX_MQUEUE (5.15+ kernels)
-        if [[ "${{ inputs.kernel_version }}" == "5.15" || "${{ inputs.kernel_version }}" == "6.1" || "${{ inputs.kernel_version }}" == "6.6" || "${{ inputs.kernel_version }}" == "6.12" ]]; then
-          patch -p1 < "$PATCH_DIR/03.5.15+_use_android_abi_padding_for_posix_mqueue.patch"
-        fi
-
-        # 4. Use Android ABI padding for SYSVIPC task_struct
-        patch -p1 < "$PATCH_DIR/04.use_android_abi_padding_for_sysvipc_task_struct.patch"
-        
     - name: Sync Kernel Source
       working-directory: ${{ env.KERNEL_ROOT }}
       env:
@@ -194,6 +172,28 @@ jobs:
 
         repo --trace sync -c -j$(nproc --all) --fail-fast --no-tags --force-sync --no-clone-bundle
 
+    - name: Apply LXC and GKI ABI Patches
+      working-directory: ${{ env.KERNEL_ROOT }}/common
+      run: |
+        echo "Applying LXC and GKI ABI compatibility patches..."
+        
+        # Assuming you've uploaded these to a 'patches/lxc' folder in your repo
+       # PATCH_DIR="$GITHUB_WORKSPACE/patches/lxc"
+
+        # 1. Ignore symbol CRC checks to allow module loading
+        patch -p1 < "$PATCH_DIR/01.disable_crc_checks_for_lkms.patch"
+
+        # 2. Restore cgroup file prefix handling for LXC compatibility
+        patch -p1 < "$PATCH_DIR/02.fix_restore_cgroup_file_prefix_handling.patch"
+
+        # 3. Use Android ABI padding for POSIX_MQUEUE (5.15+ kernels)
+        if [[ "${{ inputs.kernel_version }}" == "5.15" || "${{ inputs.kernel_version }}" == "6.1" || "${{ inputs.kernel_version }}" == "6.6" || "${{ inputs.kernel_version }}" == "6.12" ]]; then
+          patch -p1 < "$PATCH_DIR/03.5.15+_use_android_abi_padding_for_posix_mqueue.patch"
+        fi
+
+        # 4. Use Android ABI padding for SYSVIPC task_struct
+        patch -p1 < "$PATCH_DIR/04.use_android_abi_padding_for_sysvipc_task_struct.patch"
+        
     - name: Extract Sublevel
       env:
         INPUT_SUB_LEVEL: ${{ inputs.sub_level }}
