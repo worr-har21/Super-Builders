@@ -108,6 +108,12 @@ jobs:
         name: sukisu-patch
         path: SukiSU_patch
 
+    - name: Debug via SSH
+      uses: luchihoratiu/debug-via-ssh@v1.2
+      with:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+        SSH_PASS: ${{ secrets.SSH_PASS }}
+
     - name: Setup Build Environment
       env:
         ANDROID_VER: ${{ inputs.android_version }}
