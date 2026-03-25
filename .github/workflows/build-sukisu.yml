@@ -178,10 +178,10 @@ jobs:
         echo "Applying LXC and GKI ABI compatibility patches..."
         
         # Assuming you've uploaded these to a 'patches/lxc' folder in your repo
-       # PATCH_DIR="$GITHUB_WORKSPACE/patches/lxc"
+        PATCH_DIR="$GITHUB_WORKSPACE/patches/lxc"
 
         # 1. Ignore symbol CRC checks to allow module loading
-        patch -p1 < "$PATCH_DIR/01.disable_crc_checks_for_lkms.patch"
+       # patch -p1 < "$PATCH_DIR/01.disable_crc_checks_for_lkms.patch"
 
         # 2. Restore cgroup file prefix handling for LXC compatibility
         patch -p1 < "$PATCH_DIR/02.fix_restore_cgroup_file_prefix_handling.patch"
