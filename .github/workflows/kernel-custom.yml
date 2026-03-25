@@ -206,6 +206,9 @@ on:
       add_overlayfs_support:
         type: boolean
         default: true
+      add_lxc:
+        type: boolean
+        default: true
       add_kpm:
         type: boolean
         default: false
