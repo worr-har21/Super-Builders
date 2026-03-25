@@ -139,6 +139,7 @@ jobs:
           - sub_level: "118"
             os_patch_level: "2026-01"
     uses: ./.github/workflows/build-sukisu.yml
+    secrets: inherit
     with:
       android_version: android15
       kernel_version: "6.6"
@@ -153,7 +154,6 @@ jobs:
       add_kpm: ${{ inputs.add_kpm }}
       sukisu_commit: ${{ inputs.sukisu_commit }}
       device_codename: ${{ inputs.device_codename }}
-    secrets: inherit
 
   build-ksu-next:
     needs: [download-dependencies]
@@ -197,6 +197,7 @@ jobs:
           - sub_level: "118"
             os_patch_level: "2026-01"
     uses: ./.github/workflows/build-ksu-next.yml
+    secrets: inherit
     with:
       android_version: android15
       kernel_version: "6.6"
@@ -211,7 +212,6 @@ jobs:
       add_kpm: ${{ inputs.add_kpm }}
       sukisu_commit: ${{ inputs.sukisu_commit }}
       device_codename: ${{ inputs.device_codename }}
-    secrets: inherit
 
   build-resukisu:
     needs: [download-dependencies]
@@ -255,6 +255,7 @@ jobs:
           - sub_level: "118"
             os_patch_level: "2026-01"
     uses: ./.github/workflows/build-resukisu.yml
+    secrets: inherit
     with:
       android_version: android15
       kernel_version: "6.6"
@@ -269,7 +270,6 @@ jobs:
       add_kpm: ${{ inputs.add_kpm }}
       sukisu_commit: ${{ inputs.sukisu_commit }}
       device_codename: ${{ inputs.device_codename }}
-    secrets: inherit
 
   build-wksu:
     needs: [download-dependencies]
@@ -313,6 +313,7 @@ jobs:
           - sub_level: "118"
             os_patch_level: "2026-01"
     uses: ./.github/workflows/build-wksu.yml
+    secrets: inherit
     with:
       android_version: android15
       kernel_version: "6.6"
@@ -327,4 +328,3 @@ jobs:
       add_kpm: ${{ inputs.add_kpm }}
       sukisu_commit: ${{ inputs.sukisu_commit }}
       device_codename: ${{ inputs.device_codename }}
-    secrets: inherit
