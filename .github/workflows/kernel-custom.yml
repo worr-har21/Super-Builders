@@ -451,6 +451,7 @@ jobs:
       add_zram: ${{ inputs.add_zram }}
       add_bbg: ${{ inputs.add_bbg }}
       add_overlayfs_support: ${{ inputs.add_overlayfs_support }}
+      add_lxc: ${{ inputs.add_lxc }}
       add_kpm: ${{ inputs.add_kpm }}
       sukisu_commit: ${{ inputs.sukisu_commit }}
       device_codename: ${{ needs.resolve.outputs.device_codename }}
