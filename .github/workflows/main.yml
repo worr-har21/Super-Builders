@@ -52,6 +52,10 @@ on:
         description: "Add overlayfs support (CONFIG_TMPFS_XATTR + POSIX ACL)"
         type: boolean
         default: true
+      add_lxc:
+        description: "Add LXC Support"
+        type: boolean
+        default: true
       add_kpm:
         description: "Add KPM (SukiSU/ReSukiSU)"
         type: boolean
@@ -155,6 +159,7 @@ jobs:
       add_zram: ${{ inputs.add_zram }}
       add_bbg: ${{ inputs.add_bbg }}
       add_overlayfs_support: ${{ inputs.add_overlayfs_support }}
+      add_lxc: ${{ inputs.add_lxc }}
       add_kpm: ${{ inputs.add_kpm }}
       sukisu_commit: ${{ inputs.sukisu_commit }}
       device_codename: ${{ inputs.device_codename }}
