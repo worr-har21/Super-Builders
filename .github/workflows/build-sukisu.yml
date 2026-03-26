@@ -176,20 +176,20 @@ jobs:
       working-directory: ${{ env.KERNEL_ROOT }}/common
       run: |
         echo "Applying LXC and GKI ABI compatibility patches..."
-         # Assuming you've uploaded these to a 'patches/lxc' folder in your repo
+        # Assuming you've uploaded these to a 'patches/lxc' folder in your repo
         PATCH_DIR="$GITHUB_WORKSPACE/patches/lxc"
         # 1. Ignore symbol CRC checks to allow module loading
-        # patch -p1 < "$PATCH_DIR/01.disable_crc_checks_for_lkms.patch"
+        # patch -p1 -F3 --no-backup-if-mismatch < "$PATCH_DIR/01.disable_crc_checks_for_lkms.patch"
         # 2. Restore cgroup file prefix handling for LXC compatibility
-        patch -p1 < "$PATCH_DIR/02.fix_restore_cgroup_file_prefix_handling.patch"
-         # 3. Use Android ABI padding for POSIX_MQUEUE (5.15+ kernels)
+        patch -p1 -F3 --no-backup-if-mismatch < "$PATCH_DIR/02.fix_restore_cgroup_file_prefix_handling.patch"
+        # I 3. Use Android ABI padding for POSIX_MQUEUE (5.15+ kernels)
         if [[ "${{ inputs.kernel_version }}" == "5.15" || "${{ inputs.kernel_version }}" == "6.1" || "${{ inputs.kernel_version }}" == "6.6" || "${{ inputs.kernel_version }}" == "6.12" ]]; then
-          patch -p1 < "$PATCH_DIR/03.5.15+_use_android_abi_padding_for_posix_mqueue.patch"
+          patch -p1 -F3 --no-backup-if-mismatch < "$PATCH_DIR/03.5.15+_use_android_abi_padding_for_posix_mqueue.patch"
         fi
         # 4. Use Android ABI padding for SYSVIPC task_struct
-        patch -p1 < "$PATCH_DIR/04.use_android_abi_padding_for_sysvipc_task_struct.patch"
+        patch -p1 -F3 --no-backup-if-mismatch < "$PATCH_DIR/04.use_android_abi_padding_for_sysvipc_task_struct.patch"
         # 5. apply cpufreq patch (******)
-        patch -p1 < "$PATCH_DIR/use_unlikely_wrap_cpufreq.patch
+        patch -p1 -F3 --no-backup-if-mismatch < "$PATCH_DIR/use_unlikely_wrap_cpufreq.patch
         
     - name: Extract Sublevel
       env:
@@ -592,3 +592,4 @@ jobs:
         
         REPORT="$GITHUB_WORKSPACE/$VERSION_DIR/build-helpers/report-config.sh"
         [ -f "$REPORT" ] && bash "$REPORT" "$KERNEL_ROOT" "$ANDROID_VER" "$KERNEL_VER" || true
+  
