@@ -188,6 +188,8 @@ jobs:
         fi
         # 4. Use Android ABI padding for SYSVIPC task_struct
         patch -p1 < "$PATCH_DIR/04.use_android_abi_padding_for_sysvipc_task_struct.patch"
+        # 5. apply cpufreq patch (******)
+        patch -p1 < "$PATCH_DIR/use_unlikely_wrap_cpufreq.patch
         
     - name: Extract Sublevel
       env:
