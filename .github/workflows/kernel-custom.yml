@@ -1,4 +1,4 @@
-name: Custom Kernel Build
+name: "Custom Kernel Build"
 
 permissions:
   contents: write
